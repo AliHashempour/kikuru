@@ -30,3 +30,14 @@ def db_insert(request_url):
     cursor.execute(insert_query, val)
     con.commit()
     return url_id
+
+
+def db_select(url_id):
+    con = db_connection()
+    cursor = con.cursor()
+
+    select_query = f"SELECT URL_ADDRESS FROM urls_table WHERE ID ={url_id}"
+    cursor.execute(select_query)
+    result = cursor.fetchall()
+    result_url = result[0][0]
+    return result_url
