@@ -1,13 +1,15 @@
 import psycopg2
+from app.helpers.config_helper import ConfigHelper
+
+CFG_HELPER = ConfigHelper()
 
 
 def db_connection():
-    host = 'localhost'
-    database = 'url-shortener'
-    user = 'postgres'
-    password = '22442883'
+    host = CFG_HELPER.get("POSTGRES", "host")
+    database = CFG_HELPER.get("POSTGRES", "database_name")
+    user = CFG_HELPER.get("POSTGRES", "username")
+    password = CFG_HELPER.get("POSTGRES", "password")
 
-    # Establish the connection
     connection = psycopg2.connect(
         host=host,
         database=database,
