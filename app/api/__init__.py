@@ -19,5 +19,7 @@ def handler():
 def shortened_url_handler(url_id):
     _id = url_id
     actual_url = utils.db_select(url_id=_id)
-    return redirect(f"https://{actual_url}")
-
+    if 'https://' in actual_url:
+        return redirect(actual_url)
+    else:
+        return redirect(f"https://{actual_url}")
